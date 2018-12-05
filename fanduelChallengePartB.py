@@ -25,10 +25,7 @@ conn.execute("""
     AND (next.sent_date=original.sent_date OR (next.sent_date IS NULL and original.sent_date IS NULL))
     AND (next.bounce_date=original.bounce_date OR (next.bounce_date IS NULL and original.bounce_date IS NULL))
     AND (next.click_date=original.click_date OR (next.click_date IS NULL and original.click_date IS NULL)) WHERE (original.to_email IS NULL AND original.to_email IS NULL
-    AND original.open_date IS NULL
-    AND original.sent_date IS NULL
-    AND original.bounce_date IS NULL
-    AND original.click_date IS NULL)""")
+    AND original.open_date IS NULL AND original.sent_date IS NULL AND original.bounce_date IS NULL AND original.click_date IS NULL)""")
 
 
 conn.execute("""DELETE FROM event_summary WHERE to_email IN (SELECT to_email FROM new_events) AND batch_id IN (SELECT batch_id FROM new_events) AND sent_date IN (SELECT sent_date FROM new_events)""")
